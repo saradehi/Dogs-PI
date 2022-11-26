@@ -1,0 +1,17 @@
+.body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.img {
+    opacity: 0.5;
+    width: 700px;
+}
+
+.home {
+    position: absolute;
+    top: 50%;
+    left: 50%
+}
