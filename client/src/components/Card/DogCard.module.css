@@ -1,0 +1,16 @@
+img {
+    width: 74%;
+    height: 50%;
+}
+
+.card {
+    background-color: aqua;
+    width: 30vw;
+    height: 45vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+

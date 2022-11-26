@@ -6,6 +6,9 @@ export const CREATE_DOG = 'CREATE_DOG';
 export const DETELE_DOG = 'DELETE DOG';
 export const RESET_SEARCH = 'RESET_SEARCH'
 export const GET_TEMPERAMENTS = 'GET_TEMPERAMENTS';
+export const FILTER_TEMPERAMENTS = 'FILTER_TEMPERAMENTS';
+export const FILTER_EXISTS = 'FILTER_EXISTS';
+export const FILTER_CREATED = 'FILTER_CREATED';
 
 
 export const getAllDogs = () => {

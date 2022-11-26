@@ -1,0 +1,13 @@
+.list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+.items {
+    margin: .1%;
+    background-color: rgb(165, 62, 62);
+    width: 5%;
+}
+
+
