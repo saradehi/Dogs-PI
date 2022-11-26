@@ -18,7 +18,7 @@ const Home = () => {
     const indexOfFirstDog = indexOfLastDog - dogsPerPage;
     const currentDog = dogs.slice(indexOfFirstDog, indexOfLastDog);
 
-    const paginacion = (pageNumber) => {
+    const pagination = (pageNumber) => {
         setCurrentPage(pageNumber)
     }
 
@@ -42,7 +42,7 @@ const Home = () => {
                 <FilterBySource></FilterBySource> 
                 <FilterbyTemperament></FilterbyTemperament>
             </div>
-            <Pagination dogsPerPage={dogsPerPage} dogs={dogs.length} paginacion={paginacion} />
+            <Pagination dogsPerPage={dogsPerPage} dogs={dogs.length} pagination={pagination} />
             <div className={`${style.container}`} >
                 {
                     currentDog?.map(ele => {

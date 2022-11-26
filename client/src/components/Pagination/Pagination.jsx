@@ -1,7 +1,7 @@
 import React from "react";
 import style from "../Pagination/Pagination.module.css"
 
-const Pagination = ({dogsPerPage, dogs, paginacion}) => {
+const Pagination = ({dogsPerPage, dogs, pagination}) => {
     const pageNumbers = [];
 
     for (let i = 0; i <= Math.ceil(dogs/dogsPerPage); i++) {
@@ -13,7 +13,7 @@ const Pagination = ({dogsPerPage, dogs, paginacion}) => {
             <ul className={`${style.list}`}>
                 {pageNumbers && pageNumbers.map(num => (
                             <li className={`${style.items}`} key={num}>
-                                <a  onClick={() => paginacion(num)}>{num}</a>
+                                <a  onClick={() => pagination(num)}>{num}</a>
                             </li>
                         )
                     )}
