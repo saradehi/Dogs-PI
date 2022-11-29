@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import { getAllDogs } from "../../redux/actions";
+import { filterByTemperament, filterSource, getAllDogs, getTemperaments, order } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import DogCard from "../Card/DogCard";
 import style from '../Home/Home.module.css'
@@ -12,11 +12,13 @@ import Pagination from "../Pagination/Pagination";
 const Home = () => {
     const dispatch = useDispatch();
     const dogs = useSelector ((state) => state.allDogs)
+    const [orderState, setOrderState] = useState(''); 
     const [currentPage, setCurrentPage] = useState(1);
     const [dogsPerPage, setDogsPerPage] = useState(8);
     const indexOfLastDog = currentPage * dogsPerPage;
     const indexOfFirstDog = indexOfLastDog - dogsPerPage;
     const currentDog = dogs.slice(indexOfFirstDog, indexOfLastDog);
+    const temperaments = useSelector((state) => state.allTemperaments)
 
     const pagination = (pageNumber) => {
         setCurrentPage(pageNumber)
@@ -24,12 +26,31 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(getAllDogs());
-    },[]);
+        dispatch(getTemperaments())
+    },[dispatch]);
 
     const handlerClick = (event) => {
         event.preventDefault();
         dispatch(getAllDogs());
     };
+
+    const handlerTemperamentFilter = (event) => {
+        dispatch(filterByTemperament(event.target.value))
+        setCurrentPage(1)
+    };
+
+    const handlerSource = (event) => {
+        dispatch(filterSource(event.target.value));
+        setCurrentPage(1)
+    };
+
+    const handlerOrder = (event) => {
+        event.preventDefault();
+        dispatch(order(event.target.value));
+        setCurrentPage(1);
+        setOrderState(event.target.value)
+    };
+
 
     return (
         <div>
@@ -38,16 +59,18 @@ const Home = () => {
             <button onClick={ event => {handlerClick(event)}}>Refresh Dogs</button>
             <br />
             <div className={`${style.lists}`}>
-                <Order></Order>
-                <FilterBySource></FilterBySource> 
-                <FilterbyTemperament></FilterbyTemperament>
+                <Order onChange={e => handlerOrder(e)}></Order>
+                <FilterBySource onChange={e=> handlerSource(e)} ></FilterBySource> 
+
+                <FilterbyTemperament onChange={e => handlerTemperamentFilter(e)} temperament={temperaments}></FilterbyTemperament>
+
             </div>
             <Pagination dogsPerPage={dogsPerPage} dogs={dogs.length} pagination={pagination} />
             <div className={`${style.container}`} >
                 {
                     currentDog?.map(ele => {
                         return (
-                            <DogCard key={ele.id} image={ele.image} name={ele.name} weight={ele.weight}temperament={ele.temperament} id={ele.name} />
+                            <DogCard key={ele.id} image={ele.image} name={ele.name} weight={ele.weight}temperament={ele.temperament} id={ele.id} />
                         )
                     })
                 }

@@ -1,7 +1,10 @@
-import { GET_ALL_DOGS } from "../actions";
+import {FILTER_SOURCE, FILTER_TEMPERAMENTS, GET_ALL_DOGS, GET_DOGS_DETAILS, GET_TEMPERAMENTS, ORDER } from "../actions";
 
 const initialState = {
-    allDogs: []
+    allDogs: [],
+    allTemperaments: [],
+    dogs: [],
+    dogDetail: {}
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -9,7 +12,44 @@ const rootReducer = (state = initialState, action) => {
         case GET_ALL_DOGS:
             return {
                 ...state,
-                allDogs: action.payload
+                allDogs: action.payload,
+                dogs: action.payload
+            };
+        case GET_TEMPERAMENTS:
+            return {
+                ...state,
+                allTemperaments: action.payload
+            };
+        case FILTER_TEMPERAMENTS:
+            const temps = state.dogs;
+            const temperamentsFiltered = action.payload === 'all_temperaments' ? temps : temps.filter(ele => ele.temperament?.split(',').map(ele => ele.trim()).includes(action.payload))
+
+            return {
+                ...state,
+                allDogs: temperamentsFiltered
+            };
+        case FILTER_SOURCE:
+            const dogs = state.dogs;
+            const createdFiltered = action.payload === 'all' ? dogs : action.payload === 'sourceApi' ? dogs.filter(ele => ele.id.toString().length < 4) : dogs.filter(ele => ele.id.toString().length > 4)
+            return {
+                ...state,
+                allDogs: createdFiltered
+            };
+        case GET_DOGS_DETAILS:
+            return {
+                ...state,
+                dogDetail: action.payload
+            };
+        case ORDER:
+            const orderDogs = state.allDogs;
+            const sorted = action.payload === 'a-z' ? orderDogs.sort((a, b) => a.name > b.name ? 1 : a.name < b.name ? -1 : 0) 
+            : action.payload === 'z-a' ? orderDogs.sort((a, b) => a.name < b.name ? 1 : a.name > b.name ? -1 : 0) 
+            : action.payload === 'min-weight' ? orderDogs.sort((a, b) => a.weight > b.weight ? 1 : a.weight < b.weight ? -1 : 0) 
+            : orderDogs.sort((a, b) => a.weight < b.weight ? 1 : a.weight > b.weight ? -1 : 0)
+
+            return {
+                ...state,
+                allDogs: sorted
             };
         default: 
             return {

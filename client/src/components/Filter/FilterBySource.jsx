@@ -1,9 +1,10 @@
 
 
-const FilterBySource = () => {
+const FilterBySource = ({onChange}) => {
     return (
         <div>
-            <select name="source filter">
+            <select onChange={onChange}>
+                <option value="all">All</option>
                 <option value="sourceApi">API</option>
                 <option value="sourceDb">DB</option>
             </select>

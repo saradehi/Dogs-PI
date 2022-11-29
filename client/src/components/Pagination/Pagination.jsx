@@ -4,7 +4,7 @@ import style from "../Pagination/Pagination.module.css"
 const Pagination = ({dogsPerPage, dogs, pagination}) => {
     const pageNumbers = [];
 
-    for (let i = 0; i <= Math.ceil(dogs/dogsPerPage); i++) {
+    for (let i = 0; i <= Math.ceil(dogs/dogsPerPage)-1; i++) {
         pageNumbers.push(i+1)
     }
 
