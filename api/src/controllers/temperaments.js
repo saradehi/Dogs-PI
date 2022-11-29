@@ -5,30 +5,42 @@ const {Temperament} = require('../db')
 
 const temperamentsHandler = async() => {
 
-    const temperamentsDb = await Temperament.findAll()
+    const temperamentsDb = await Temperament.findAll() 
 
-    // Bring all temperaments from API
-    const url = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`);
-    let res = await url.data.map(ele => ele.temperament);
-    res = res.join(', ').split(',').map(ele => ele.trim())
-    let filteredTemps = res.filter(ele => ele !== "")
-    const uniqueTemps = [...new Set(filteredTemps)]
-    const sortedTemps = [...uniqueTemps].sort();
+    if(temperamentsDb.length > 0) {
+        return [...temperamentsDb]
+    } 
 
-    let apiTemps = [];
-    if(uniqueTemps.length > 0) {
-         apiTemps = sortedTemps.map(ele => {
-            return {
-                name: ele
-            }
-        });
-        
-        const tempsCreatedDb = await Temperament.bulkCreate(apiTemps);
-        return tempsCreatedDb;
+    
+    else {
+        // Bring all temperaments from API
+        const url = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`);
+        let res = await url.data.map(ele => ele.temperament);
+        res = res.join(', ').split(',').map(ele => ele.trim())
+        let filteredTemps = res.filter(ele => ele !== "")
+        const uniqueTemps = [...new Set(filteredTemps)]
+        const sortedTemps = [...uniqueTemps].sort();
+        let apiTemps = [];
 
-    } else {
-        throw new Error('No temperaments founded')
+        if(uniqueTemps.length > 0) {
+            apiTemps = sortedTemps.map(ele => {
+               return {
+                   name: ele
+               }
+           });
+
+           const tempsCreatedDb = await Temperament.bulkCreate(apiTemps);
+           let lastArr= [...tempsCreatedDb, ...temperamentsDb];
+           return lastArr;
+
+        } else {
+            throw new Error('No temperaments founded')
+        }
     }
+
+
+
+
 
 };
 

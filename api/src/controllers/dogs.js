@@ -13,7 +13,7 @@ const getDogsApi = async() => {
             id: ele.id,
             name: ele.name,
             height: ele.height.metric,
-            weight: ele.weight.metric,
+            weight: ele.weight.metric.split(' - ').map(ele=> parseInt(ele)).reduce((a, b) => a + b)/2,
             life_span: ele.life_span,
             temperament: ele.temperament,
             image: ele.image.url

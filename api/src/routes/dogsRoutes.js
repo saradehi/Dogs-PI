@@ -20,8 +20,6 @@ router.get('/', (req, res) => {
         } 
         res.status(200).send(response)
     });
-
-    
 });
 
 // Async Await
@@ -44,25 +42,26 @@ router.get('/:id', async(req, res) => {
 
 router.post('/', async(req, res) => {
 
-    const {name, height, weight,life_span, image, temperaments } = req.body;
+    const {name, height, weight,life_span, image, temperament } = req.body;
 
     try {
         if(!name || !height || !weight || !image) {
             res.status(404).send('Missing info')
         }; 
-
+        const weightP = weight.split(' - ').map(ele=> parseInt(ele)).reduce((a, b) => a + b)/2
 
         const newDog = await Dog.create({
-            name,
+            name: name[0].toUpperCase() + name.slice(1),
             height,
-            weight,
+            weight: weightP,
             life_span,
             image,
+            temperament: temperament.split(', ').map(ele=> ele.trim()[0].toUpperCase() + ele.trim().slice(1)).join(', ')
             
         });
 
-        if(temperaments) {
-            let arrTemp = temperaments.split(',').map(ele => ele.trim()[0].toUpperCase() + ele.trim().slice(1))
+        if(temperament) {
+            let arrTemp = temperament.split(',').map(ele => ele.trim()[0].toUpperCase() + ele.trim().slice(1))
         
             
             arrTemp.forEach(async (ele) => {
@@ -76,7 +75,7 @@ router.post('/', async(req, res) => {
             });
             
         }
-        res.status(201).json('Dog created successfully');
+        res.status(201).json(newDog);
     } catch (error) {
         res.status(404).send(error.message);
     }
