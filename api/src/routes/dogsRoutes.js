@@ -4,6 +4,53 @@ const router = Router();
 const {Dog, Temperament} = require('../db');
 
 
+router.post('/', async(req, res) => {
+
+    const {name, height, weight_min, weight_max, life_span, image, temperament } = req.body;
+
+    try {
+        if(!name || !height || !weight_max || !weight_min || !image) {
+            res.status(404).send('Missing info')
+        }; 
+
+
+        let weightP = (parseInt(weight_min) + parseInt(weight_max)) / 2;
+        
+
+        const newDog = await Dog.create({
+            name: name[0].toUpperCase() + name.slice(1),
+            height,
+            weight_min,
+            weight_max,
+            weight: weightP,
+            life_span,
+            image,
+            temperament: temperament.split(', ').map(ele=> ele.trim()[0].toUpperCase() + ele.trim().slice(1)).join(', ')
+            
+        });
+
+        if(temperament) {
+            let arrTemp = temperament.split(',').map(ele => ele.trim()[0].toUpperCase() + ele.trim().slice(1))
+        
+            
+            arrTemp.forEach(async (ele) => {
+                
+                let index = await Temperament.findOrCreate({
+                    where: {name: ele}
+                })
+                
+                await newDog.addTemperament(index[0]);
+                
+            });
+            
+        }
+        res.status(201).json(newDog);
+    } catch (error) {
+        res.status(404).send(error.message);
+    }
+
+});
+
 // Promises
 
 router.get('/', (req, res) => {
@@ -40,47 +87,6 @@ router.get('/:id', async(req, res) => {
 
 });
 
-router.post('/', async(req, res) => {
-
-    const {name, height, weight,life_span, image, temperament } = req.body;
-
-    try {
-        if(!name || !height || !weight || !image) {
-            res.status(404).send('Missing info')
-        }; 
-        const weightP = weight.split(' - ').map(ele=> parseInt(ele)).reduce((a, b) => a + b)/2
-
-        const newDog = await Dog.create({
-            name: name[0].toUpperCase() + name.slice(1),
-            height,
-            weight: weightP,
-            life_span,
-            image,
-            temperament: temperament.split(', ').map(ele=> ele.trim()[0].toUpperCase() + ele.trim().slice(1)).join(', ')
-            
-        });
-
-        if(temperament) {
-            let arrTemp = temperament.split(',').map(ele => ele.trim()[0].toUpperCase() + ele.trim().slice(1))
-        
-            
-            arrTemp.forEach(async (ele) => {
-                
-                let index = await Temperament.findOrCreate({
-                    where: {name: ele}
-                })
-                
-                await newDog.addTemperament(index[0]);
-                
-            });
-            
-        }
-        res.status(201).json(newDog);
-    } catch (error) {
-        res.status(404).send(error.message);
-    }
-
-});
 
 router.delete('/:id', async(req, res) => {
 
