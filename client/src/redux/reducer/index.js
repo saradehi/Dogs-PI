@@ -1,10 +1,10 @@
-import {FILTER_SOURCE, FILTER_TEMPERAMENTS, GET_ALL_DOGS, GET_DOGS_DETAILS, GET_TEMPERAMENTS, ORDER } from "../actions";
+import {FILTER_SOURCE, FILTER_TEMPERAMENTS, GET_ALL_DOGS, GET_DOGS_DETAILS, GET_TEMPERAMENTS, ORDER, SEARCH_BY_NAME } from "../actions";
 
 const initialState = {
     allDogs: [],
     allTemperaments: [],
     dogs: [],
-    dogDetail: {}
+    dogDetail: {},
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -31,9 +31,10 @@ const rootReducer = (state = initialState, action) => {
         case FILTER_SOURCE:
             const dogs = state.dogs;
             const createdFiltered = action.payload === 'all' ? dogs : action.payload === 'sourceApi' ? dogs.filter(ele => ele.id.toString().length < 4) : dogs.filter(ele => ele.id.toString().length > 4)
+
             return {
                 ...state,
-                allDogs: createdFiltered
+                allDogs: createdFiltered.length > 0 ? createdFiltered : "There are no dogs in your database"
             };
         case GET_DOGS_DETAILS:
             return {
@@ -51,6 +52,11 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 allDogs: sorted
             };
+        case SEARCH_BY_NAME:
+            return {
+                ...state,
+                allDogs: action.payload
+            }
         default: 
             return {
                 ...state

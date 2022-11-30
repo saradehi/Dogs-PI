@@ -8,6 +8,8 @@ import Order from "../Order/Order";
 import FilterBySource from "../Filter/FilterBySource";
 import FilterbyTemperament from "../Filter/FilterByTemperament";
 import Pagination from "../Pagination/Pagination";
+import SearchBar from "../SearchBar/SearchBar";
+
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -18,7 +20,8 @@ const Home = () => {
     const indexOfLastDog = currentPage * dogsPerPage;
     const indexOfFirstDog = indexOfLastDog - dogsPerPage;
     const currentDog = dogs.slice(indexOfFirstDog, indexOfLastDog);
-    const temperaments = useSelector((state) => state.allTemperaments)
+    const temperaments = useSelector((state) => state.allTemperaments);
+
 
     const pagination = (pageNumber) => {
         setCurrentPage(pageNumber)
@@ -65,10 +68,12 @@ const Home = () => {
                 <FilterbyTemperament onChange={e => handlerTemperamentFilter(e)} temperament={temperaments}></FilterbyTemperament>
 
             </div>
+            <SearchBar setCurrentPage={setCurrentPage}></SearchBar>
             <Pagination dogsPerPage={dogsPerPage} dogs={dogs.length} pagination={pagination} />
             <div className={`${style.container}`} >
                 {
-                    currentDog?.map(ele => {
+                    typeof dogs === 'string' || typeof dogs[0] === 'string' ? <h1>{dogs}</h1>
+                    : currentDog.map(ele => {
                         return (
                             <DogCard key={ele.id} image={ele.image} name={ele.name} weight={ele.weight}temperament={ele.temperament} id={ele.id} />
                         )
