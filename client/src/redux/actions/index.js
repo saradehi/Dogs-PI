@@ -8,7 +8,9 @@ export const SEARCH_BY_NAME = 'SEARCH_BY_NAME'
 export const GET_TEMPERAMENTS = 'GET_TEMPERAMENTS';
 export const FILTER_TEMPERAMENTS = 'FILTER_TEMPERAMENTS';
 export const FILTER_SOURCE = 'FILTER_SOURCE';
-export const ORDER = 'ORDER'
+export const ORDER = 'ORDER';
+export const LOADING = 'LOADING';
+export const LOADING_HOME = "LOADING_HOME"
 
 
 export const getAllDogs = () => {
@@ -64,5 +66,21 @@ export const searchByName = (name) => {
             return dispatch({type: SEARCH_BY_NAME, payload: error.response.data})
         }
     }
+};
+
+export const loading = (payload) => {
+    return {
+        type: LOADING,
+        payload
+    }
+};
+
+export const loadingHome = (payload) => {
+    return {
+        type: LOADING_HOME,
+        payload
+    }
 }
+
+
 

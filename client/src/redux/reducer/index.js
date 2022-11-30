@@ -1,10 +1,12 @@
-import {FILTER_SOURCE, FILTER_TEMPERAMENTS, GET_ALL_DOGS, GET_DOGS_DETAILS, GET_TEMPERAMENTS, ORDER, SEARCH_BY_NAME } from "../actions";
+import {FILTER_SOURCE, FILTER_TEMPERAMENTS, GET_ALL_DOGS, GET_DOGS_DETAILS, GET_TEMPERAMENTS, LOADING, LOADING_HOME, ORDER, SEARCH_BY_NAME } from "../actions";
 
 const initialState = {
     allDogs: [],
     allTemperaments: [],
     dogs: [],
     dogDetail: {},
+    loading: true,
+    loadingHome: true
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -56,6 +58,16 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 allDogs: action.payload
+            };
+        case LOADING:
+            return {
+                ...state,
+                loading: action.payload
+            };
+        case LOADING_HOME:
+            return {
+                ...state,
+                loadingHome: action.payload
             }
         default: 
             return {
