@@ -67,20 +67,22 @@ router.get('/:id', async(req, res) => {
 
 router.post('/', async(req, res) => {
 
-    const {name, height, weight_min, weight_max, life_span, image, temperament } = req.body;
+    const {name, height_min, height_max, weight_min, weight_max, life_span, image, temperament } = req.body;
 
     try {
-        if(!name || !height || !weight_max || !weight_min || !image) {
+        if(!name || !height_min || !height_max || !weight_max || !weight_min || !image) {
             res.status(404).send('Missing info')
         }; 
 
 
         let weightP = (parseInt(weight_min) + parseInt(weight_max)) / 2;
-        
+        let heightTotal = `${height_min} - ${height_max}`
 
         const newDog = await Dog.create({
             name: name[0].toUpperCase() + name.slice(1),
-            height,
+            height_min,
+            height_max,
+            height: heightTotal,
             weight_min,
             weight_max,
             weight: weightP,
@@ -105,7 +107,7 @@ router.post('/', async(req, res) => {
             });
             
         }
-        res.status(201).json('Dog created successfully');
+        res.status(201).json(newDog);
     } catch (error) {
         res.status(404).send('Your dog can not be created');
     }
