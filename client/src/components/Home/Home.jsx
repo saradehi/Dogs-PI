@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import { filterByTemperament, filterSource, getAllDogs, getTemperaments, loadingHome, order } from "../../redux/actions";
+import { filterByTemperament, filterSource, getAllDogs, getTemperaments, loading, loadingHome, order } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import DogCard from "../Card/DogCard";
 import style from '../Home/Home.module.css'
@@ -16,13 +16,13 @@ const Home = () => {
     const dispatch = useDispatch();
     const dogs = useSelector (state => state.allDogs);
     const isLoading = useSelector(state => state.loadingHome)
+    const temperaments = useSelector((state) => state.allTemperaments);
     const [orderState, setOrderState] = useState(''); 
     const [currentPage, setCurrentPage] = useState(1);
     const [dogsPerPage, setDogsPerPage] = useState(8);
     const indexOfLastDog = currentPage * dogsPerPage;
     const indexOfFirstDog = indexOfLastDog - dogsPerPage;
     const currentDog = dogs.slice(indexOfFirstDog, indexOfLastDog);
-    const temperaments = useSelector((state) => state.allTemperaments);
 
 
 
@@ -32,11 +32,14 @@ const Home = () => {
 
 
     useEffect(() => {
-        dispatch(getAllDogs());
         dispatch(getTemperaments());
+        if(dogs.length < 1) {
+            dispatch(getAllDogs())
+        }
         setTimeout(() => {
             dispatch(loadingHome(false))
-        }, 1800);
+        }, 900);
+        dispatch(loading(true))
     },[]);
 
     const handlerClick = (event) => {
@@ -62,9 +65,10 @@ const Home = () => {
     };
 
 
+
     return (
         <div>
-            <p><Link to={'/'} >Landing Page</Link></p>
+            <p><button onClick={event => handlerClick(event)}><Link to={'/'}>Landing page</Link> </button></p>
             <p><Link to={'/dogs'} >Create Dog</Link></p>
             <h1>DOGS API</h1>
             <button onClick={ event => {handlerClick(event)}}>Refresh Dogs</button>
@@ -77,12 +81,17 @@ const Home = () => {
 
             </div>
             <SearchBar setCurrentPage={setCurrentPage}></SearchBar>
+            
             <Pagination dogsPerPage={dogsPerPage} dogs={dogs.length} pagination={pagination} />
             {
                 isLoading === true ? <Loading></Loading>
                 : <div className={`${style.container}`} >
                     {
-                        typeof dogs === 'string' || typeof dogs[0] === 'string' ? <h1>{dogs}</h1>
+                        typeof dogs === 'string' || typeof dogs[0] === 'string' ? 
+                        <div>
+                            <h1>{dogs}</h1>
+                            <button onClick={event => handlerClick(event)} style={{width: '8rem', height: '1.5rem'}} >Keep searching</button>
+                        </div>
                         : currentDog.map(ele => {
                             return (
                                 <DogCard key={ele.id} image={ele.image} name={ele.name} weight={ele.weight}temperament={ele.temperament} id={ele.id} />

@@ -7,7 +7,6 @@ const Pagination = ({dogsPerPage, dogs, pagination}) => {
     for (let i = 0; i <= Math.ceil(dogs/dogsPerPage)-1; i++) {
         pageNumbers.push(i+1)
     }
-    
 
     return (
         <nav >

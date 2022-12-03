@@ -1,4 +1,4 @@
-import {FILTER_SOURCE, FILTER_TEMPERAMENTS, GET_ALL_DOGS, GET_DOGS_DETAILS, GET_TEMPERAMENTS, LOADING, LOADING_HOME, ORDER, SEARCH_BY_NAME } from "../actions";
+import {CREATE_DOG, DELETE_DOG, FILTER_SOURCE, FILTER_TEMPERAMENTS, GET_ALL_DOGS, GET_DOGS_DETAILS, GET_TEMPERAMENTS, LOADING, LOADING_HOME, ORDER, SEARCH_BY_NAME } from "../actions";
 
 const initialState = {
     allDogs: [],
@@ -6,7 +6,9 @@ const initialState = {
     dogs: [],
     dogDetail: {},
     loading: true,
-    loadingHome: true
+    loadingHome: true,
+    createdDog: '',
+    deletedDog: ''
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -68,6 +70,16 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loadingHome: action.payload
+            };
+        case CREATE_DOG:
+            return {
+                ...state,
+                createdDog: action.payload
+            };
+        case DELETE_DOG:
+            return {
+                ...state,
+                deletedDog: action.payload
             }
         default: 
             return {
