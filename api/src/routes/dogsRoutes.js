@@ -70,7 +70,7 @@ router.post('/', async(req, res) => {
     const {name, height_min, height_max, weight_min, weight_max, life_span, image, temperament } = req.body;
 
     try {
-        if(!name || !height_min || !height_max || !weight_max || !weight_min || !image) {
+        if(!name || !height_min || !height_max || !weight_max || !weight_min) {
             res.status(404).send('Missing info')
         }; 
 
@@ -87,7 +87,7 @@ router.post('/', async(req, res) => {
             weight_max,
             weight: weightP,
             life_span,
-            image,
+            image:image ? image : "https://ae01.alicdn.com/kf/H2a77ef5575d648c5b30b54416099ae20O/Peluca-de-cosplay-para-perros-accesorios-de-cabeza-falsa-para-perros-peque-os-medianos-y-grandes.jpg_Q90.jpg_.webp",
             temperament: temperament.split(', ').map(ele=> ele.trim()[0].toUpperCase() + ele.trim().slice(1)).join(', ')
             
         });
@@ -101,13 +101,13 @@ router.post('/', async(req, res) => {
                 let index = await Temperament.findOrCreate({
                     where: {name: ele}
                 })
-                
                 await newDog.addTemperament(index[0]);
                 
             });
             
         }
-        res.status(201).json(newDog);
+        // res.status(201).json('¡Congratulations! Dog created successfully');
+        res.status(201).send(newDog);
     } catch (error) {
         res.status(404).send('Your dog can not be created');
     }
@@ -127,9 +127,9 @@ router.delete('/:id', async(req, res) => {
                 }
             })
 
-            res.json('Dog deleted successfully')
+            res.json(`Dog deleted successfully ${id}`)
         } else {
-            res.status(404).send("Your dog couldn't be deleted, please try again later")
+            res.status(404).send(`Your dog couldn't be deleted, please try again later ${id}`)
         }
     } catch (error) {
         res.status(404).send(error.message)

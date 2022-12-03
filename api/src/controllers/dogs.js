@@ -48,7 +48,7 @@ const getDogsDb = async() => {
     }
 
     else {
-        const findedDogs = await findDogs.map(dogs => {
+        const findedDogs = findDogs.map(dogs => {
             return {
                 id: dogs.dataValues.id,
                 name: dogs.dataValues.name,
