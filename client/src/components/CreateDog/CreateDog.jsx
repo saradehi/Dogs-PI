@@ -301,7 +301,7 @@ const CreateDog = () => {
             </div>
             <div>
                 {
-                    show === true && createdDog ? <p>Dog Created successfully. <Link to={`/dogs/${createdDog.id}`} >Click here</Link> to see details</p> : show === true && !createdDog ? <p>Dog could not be created</p> : <p></p>
+                    show === true && createdDog ? <p>Dog Created successfully. <Link to={`/home/dogs/${createdDog.id}`} >Click here</Link> to see details</p> : show === true && !createdDog ? <p>Dog could not be created</p> : <p></p>
 
                 }
             </div>

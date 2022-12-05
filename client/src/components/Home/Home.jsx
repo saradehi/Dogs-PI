@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { filterByTemperament, filterSource, getAllDogs, getTemperaments, loading, loadingHome, order } from "../../redux/actions";
-import { Link } from "react-router-dom";
 import DogCard from "../Card/DogCard";
 import style from '../Home/Home.module.css'
 import Order from "../Order/Order";
@@ -68,39 +67,53 @@ const Home = () => {
 
     return (
         <div>
-            <p><button onClick={event => handlerClick(event)}><Link to={'/'}>Landing page</Link> </button></p>
-            <p><Link to={'/dogs'} >Create Dog</Link></p>
-            <h1>DOGS API</h1>
-            <button onClick={ event => {handlerClick(event)}}>Refresh Dogs</button>
-            <br />
-            <div className={`${style.lists}`}>
-                <Order onChange={e => handlerOrder(e)}></Order>
-                <FilterBySource onChange={e=> handlerSource(e)} ></FilterBySource> 
 
-                <FilterbyTemperament onChange={e => handlerTemperamentFilter(e)} temperament={temperaments}></FilterbyTemperament>
+            <h1>DOGS APP</h1>
 
-            </div>
-            <SearchBar setCurrentPage={setCurrentPage}></SearchBar>
-            
-            <Pagination dogsPerPage={dogsPerPage} dogs={dogs.length} pagination={pagination} />
-            {
-                isLoading === true ? <Loading></Loading>
-                : <div className={`${style.container}`} >
-                    {
-                        typeof dogs === 'string' || typeof dogs[0] === 'string' ? 
-                        <div>
-                            <h1>{dogs}</h1>
-                            <button onClick={event => handlerClick(event)} style={{width: '8rem', height: '1.5rem'}} >Keep searching</button>
+           <div className={`${style.mainContainer}`}>
+                <div className={`${style.containerFilter}`}>
+                        <div className={`${style.lists}`}>
+                            <div className={`${style.search}`}>
+                                <SearchBar setCurrentPage={setCurrentPage}></SearchBar>
+                            </div>
+                            <div>
+                                <Order onChange={e => handlerOrder(e)}></Order>
+                            </div>
+                            <div className={`${style.items}`}>
+                                <FilterBySource onChange={e=> handlerSource(e)} ></FilterBySource> 
+                            </div >                            
+                            <div className={`${style.items}`}>
+                                <FilterbyTemperament  onChange={e => handlerTemperamentFilter(e)} temperament={temperaments}></FilterbyTemperament>
+                            </div>
                         </div>
-                        : currentDog.map(ele => {
-                            return (
-                                <DogCard key={ele.id} image={ele.image} name={ele.name} weight={ele.weight}temperament={ele.temperament} id={ele.id} />
-                            )
-                        })
-                    }
+                        <div>
+                            <button onClick={ event => {handlerClick(event)}} >Refresh Dogs</button>
+                        </div>
                 </div>
-            }
-
+            <div >
+                <div className={`${style.loading}`}>
+                    <Pagination dogsPerPage={dogsPerPage} dogs={dogs.length} pagination={pagination} />
+                </div>
+                {
+                    isLoading === true ? <Loading></Loading>
+                    : <div className={`${style.container}`} >
+                        {
+                            typeof dogs === 'string' || typeof dogs[0] === 'string' ? 
+                            <div>
+                                <h1>{dogs}</h1>
+                                <button onClick={event => handlerClick(event)} style={{width: '8rem', height: '1.5rem'}} >Keep searching</button>
+                            </div>
+                            : currentDog.map(ele => {
+                                return (
+                                    <DogCard key={ele.id} image={ele.image} name={ele.name} weight={ele.weight}temperament={ele.temperament} id={ele.id} />
+                                )
+                            })
+                        }
+                    </div>
+                }
+            </div>
+           </div>
+            
         </div>
     )
 

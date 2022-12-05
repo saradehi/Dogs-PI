@@ -4,13 +4,17 @@ img {
 }
 
 .card {
-    background-color: aqua;
-    width: 30vw;
-    height: 45vh;
+    background: rgb(230, 232, 243);
+    background: radial-gradient(circle, rgba(213, 214, 224, 0.11) 0%, rgba(90, 80, 74, 0.507) 48%, rgba(238,189,199,0) 100%);
+    width: 18vw;
+    height: 35vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
+    font-family: 'Laila', sans-serif;
+    border-radius: 20%;
 }
+
 
 

@@ -1,18 +1,60 @@
-body {
-    background-color: blanchedalmond;
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Laila:wght@500&display=swap');
+
+select, button, input, h1, nav {
+    font-family: 'Alegreya Sans', sans-serif;
+    font-size: medium;
 }
 
+h1 {
+    font-size: 3rem;
+    color: 594545;
+}
+
+body {
+    background-color: #f3f5ef;
+}
 
 
 .container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .lists {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-items: left;
+}
+
+.containerFilter {
+    background-color: #9E7676;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 20%;
+    height: 50vh;
+    margin-top: 5rem;
+    border-radius: 40px;
+}
+
+.mainContainer {
+    /* background-color: grey; */
+    padding: 20px;
+    display: inline-flex;
+    width: 100vw;
+}
+
+.items {
     margin-top: 20px;
-    margin-bottom: 20px;
+}
+
+.contaierRender {
+    margin: auto
+}
+
+.loading {
+    justify-content: center;
 }

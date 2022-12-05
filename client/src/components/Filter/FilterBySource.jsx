@@ -1,8 +1,8 @@
-
+import style from './Filters.module.css'
 
 const FilterBySource = ({onChange}) => {
     return (
-        <div>
+        <div >
             <select onChange={onChange}>
                 <option value="all">All</option>
                 <option value="sourceApi">API</option>

@@ -4,7 +4,7 @@ const FilterbyTemperament = ({onChange, temperament}) => {
 
 
     return(
-        <div>
+        <>
             <select onChange={onChange} > 
                 <option value="all_temperaments">All temperaments</option>
                 {
@@ -15,7 +15,7 @@ const FilterbyTemperament = ({onChange, temperament}) => {
                     })
                 }
             </select>
-        </div>
+        </>
     )
 };
 

@@ -4,6 +4,7 @@ import { deleteDog, getDogDetails } from "../../redux/actions";
 import Loading from "../Loading/Loading";
 import { loading } from "../../redux/actions";
 import { Link, useHistory } from "react-router-dom";
+import style from "./Details.module.css"
 
 
 const DogDetails = ({match}) => {
@@ -37,13 +38,13 @@ const DogDetails = ({match}) => {
         } else {
             dispatch(deleteDog(event.target.value))
             setTimeout(() => {
-                history.push('/deleted')
+                history.push('/home/deleted')
             }, 1500)
         }
     }
 
     return (
-        <div>
+        <div className={`${style.text}`}>
 
             {
                 isLoading === true ? <Loading></Loading> 
@@ -53,7 +54,7 @@ const DogDetails = ({match}) => {
                 <img src={dog.image} alt={dog.name} />
                 <div>
                     <h3>TEMPERAMENTS: {dog.temperament?.split(', ').map(ele => ele.trim()[0].toUpperCase()+ele.trim().slice(1)).sort(). join(', ')}</h3>
-                    <h4>WEIGHT: {`${dog.weight_min} - ${dog.weight_max}`} kg</h4>
+                    <h4>WEIGHT: {dog.weight_min !== '0' && dog.weight_max !== '0' ? `${dog.weight_min} - ${dog.weight_max} kg` : 'Not specified'}</h4>
                     <h4>HEIGHT: {dog.height} cm</h4>
                     <h4>LIFE SPAN: {!dog.life_span ? "10 - 15 years" : dog.life_span.split(' ').length > 1 ? dog.life_span : `${dog.life_span} years`}</h4>
                     {

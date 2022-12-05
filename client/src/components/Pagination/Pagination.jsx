@@ -9,16 +9,16 @@ const Pagination = ({dogsPerPage, dogs, pagination}) => {
     }
 
     return (
-        <nav >
+        <div >
             <ul className={`${style.list}`}>
                 {pageNumbers && pageNumbers.map(num => (
                             <li className={`${style.items}`} key={num}>
-                                <a  onClick={() => pagination(num)}>{num}</a>
+                                <button  onClick={() => pagination(num)}>{num}</button>
                             </li>
                         )
                     )}
             </ul>
-        </nav>
+        </div>
     )
 };
 

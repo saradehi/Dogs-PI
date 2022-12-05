@@ -16,22 +16,22 @@ export const PAGE = 'PAGE';
 
 export const getAllDogs = () => {
     return async function (dispatch) {
-        return axios.get('http://localhost:3001/dogs')
-        .then(res => dispatch({type: GET_ALL_DOGS, payload: res.data}))
+        const response = await axios.get('http://localhost:3001/dogs')
+        return dispatch({type: GET_ALL_DOGS, payload: response.data})
     }
 };
 
 export const getTemperaments = () => {
     return async function (dispatch) {
-        return axios.get('http://localhost:3001/temperaments')
-        .then(res => dispatch({type: GET_TEMPERAMENTS, payload: res.data}))
+        const response = await axios.get('http://localhost:3001/temperaments')
+        return dispatch({type: GET_TEMPERAMENTS, payload: response.data})
     }
 };
 
 export const getDogDetails = (id) => {
     return async function (dispatch) {
-        const res = await axios.get(`http://localhost:3001/dogs/${id}`);
-        return dispatch({ type: GET_DOGS_DETAILS, payload: res.data });
+        const response = await axios.get(`http://localhost:3001/dogs/${id}`);
+        return dispatch({ type: GET_DOGS_DETAILS, payload: response.data });
     }
 };
 
