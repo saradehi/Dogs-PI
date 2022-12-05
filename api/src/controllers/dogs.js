@@ -20,9 +20,9 @@ const getDogsApi = async() => {
                 id: ele.id,
                 name: ele.name,
                 height: ele.height.metric,
-                weight: arrWeight.map(ele=> parseInt(ele)).reduce((a, b) => a + b)/2,
-                weight_min: arrWeight[0],
-                weight_max: arrWeight[1],
+                weight: arrWeight.map(ele=> ele === 'NaN' ? ele = 0 : parseInt(ele)).reduce((a, b) => a + b)/2,
+                weight_min: arrWeight[0] === 'NaN' ? '0' : arrWeight[0],
+                weight_max: arrWeight[1] ? arrWeight[1] : '0',
                 life_span: ele.life_span,
                 temperament: ele.temperament,
                 image: ele.image.url
