@@ -66,52 +66,58 @@ const Home = () => {
 
 
     return (
-        <div>
+        <div className={`${style.body}`}>
 
-            <h1>DOGS APP</h1>
+            <h1 className={`${style.title}`}>App Dogs</h1>
 
            <div className={`${style.mainContainer}`}>
-                <div className={`${style.containerFilter}`}>
-                        <div className={`${style.lists}`}>
-                            <div className={`${style.search}`}>
-                                <SearchBar setCurrentPage={setCurrentPage}></SearchBar>
-                            </div>
-                            <div>
-                                <Order onChange={e => handlerOrder(e)}></Order>
-                            </div>
-                            <div className={`${style.items}`}>
+                <div className={`${style.search_container}`}>
+                    <div className={`${style.search}`}>
+                        <SearchBar setCurrentPage={setCurrentPage}></SearchBar>
+                    </div>
+                    <div>
+                        <button onClick={ event => {handlerClick(event)}} >Refresh Dogs</button>
+                    </div>
+                </div>
+                <div className={`${style.containerSecond}`}>
+                    <div className={`${style.containerFilter}`}>
+                        <div>
+                            <div className={`${style.filterBy}`}>
+                                <p className={`${style.p}`}>Filter by...</p>
+                                <p className={`${style.p}`}>Source</p>
                                 <FilterBySource onChange={e=> handlerSource(e)} ></FilterBySource> 
-                            </div >                            
-                            <div className={`${style.items}`}>
+                                <p className={`${style.p}`}>Temperaments</p>
                                 <FilterbyTemperament  onChange={e => handlerTemperamentFilter(e)} temperament={temperaments}></FilterbyTemperament>
                             </div>
-                        </div>
-                        <div>
-                            <button onClick={ event => {handlerClick(event)}} >Refresh Dogs</button>
-                        </div>
-                </div>
-            <div >
-                <div className={`${style.loading}`}>
-                    <Pagination dogsPerPage={dogsPerPage} dogs={dogs.length} pagination={pagination} />
-                </div>
-                {
-                    isLoading === true ? <Loading></Loading>
-                    : <div className={`${style.container}`} >
-                        {
-                            typeof dogs === 'string' || typeof dogs[0] === 'string' ? 
-                            <div>
-                                <h1>{dogs}</h1>
-                                <button onClick={event => handlerClick(event)} style={{width: '8rem', height: '1.5rem'}} >Keep searching</button>
+                            <div className={`${style.filterBy}`}>
+                                <p className={`${style.p}`}>Order By...</p>
+                                <Order onChange={e => handlerOrder(e)}></Order>
                             </div>
-                            : currentDog.map(ele => {
-                                return (
-                                    <DogCard key={ele.id} image={ele.image} name={ele.name} weight={ele.weight}temperament={ele.temperament} id={ele.id} />
-                                )
-                            })
+                        </div>
+                    </div>
+                    <div className={`${style.containerRender}`} >
+                        <div className={`${style.loading}`}>
+                            <Pagination dogsPerPage={dogsPerPage} dogs={dogs.length} pagination={pagination} />
+                        </div>
+                        {
+                            isLoading === true ? <Loading></Loading>
+                            : <div className={`${style.container}`} >
+                                {
+                                    typeof dogs === 'string' || typeof dogs[0] === 'string' ? 
+                                    <div>
+                                        <h1>{dogs}</h1>
+                                        <button onClick={event => handlerClick(event)} style={{width: '8rem', height: '1.5rem'}} >Keep searching</button>
+                                    </div>
+                                    : currentDog.map(ele => {
+                                        return (
+                                            <DogCard key={ele.id} image={ele.image} name={ele.name} weight={ele.weight}temperament={ele.temperament} id={ele.id} />
+                                        )
+                                    })
+                                }
+                            </div>
                         }
                     </div>
-                }
-            </div>
+                </div>
            </div>
             
         </div>

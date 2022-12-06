@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { dogCreate, getAllDogs, getTemperaments } from "../../redux/actions";
-import {useHistory, Link} from 'react-router-dom'
+import {useHistory, NavLink} from 'react-router-dom'
+import style from './CreateDog.module.css'
 
 
 const CreateDog = () => {
@@ -205,56 +206,87 @@ const CreateDog = () => {
     }, []);
 
     return (
-        <div>
+        <div className={`${style.mainContainer}`}>
             <h1>Create Dog</h1>
             <button onClick={event => handlerClickHome(event)}>Back to home</button>
-
             <form id="Create-Dog" onSubmit={event => handlerSubmit(event)}>
-                <div>
-                    <label >Name: <input type="text" value={input.name} name="name" onBlur={onValidateName} onChange={handlerChange} placeholder='e.g: Firulais' /> </label> 
-                    {
-                        errors.name &&
-                            (<span className="error">{errors.name}</span>)
-                    }                   
+                <div className={`${style.inputContainer}`}>
+                    <div className={`${style.div}`}>
+                        <label className={`${style.label}`}>Name:  </label> 
+                        <input className={`${style.input}`} type="text" value={input.name} name="name" onBlur={onValidateName} onChange={handlerChange} placeholder='e.g: Firulais' />
+                    </div>
+                   <div className={`${style.error}`}>
+                    
+                        {
+                            errors.name &&
+                                (<span className="error">{errors.name}</span>)
+                        }       
+                    </div>            
                 </div>
                 <div>
-                    <label >Min weight: <input type="text" value={input.weight_min} name="weight_min" onBlur={onValidateWeightMin} onChange={handlerChange} placeholder='e.g: 10' /> </label>  
-                    {
-                        errors.weight_min && 
-                            (<span className="error">{errors.weight_min}</span>)
-                    }                  
+                    <div className={`${style.div}`}>
+                        <label className={`${style.label}`} >Min weight:  </label>  
+                        <input className={`${style.input}`} type="text" value={input.weight_min} name="weight_min" onBlur={onValidateWeightMin} onChange={handlerChange} placeholder='e.g: 10' /> 
+                    </div>
+                    <div className={`${style.error}`}>
+                        {
+                            errors.weight_min && 
+                                (<span className="error">{errors.weight_min}</span>)
+                        }         
+                    </div>         
                 </div>
                 <div>
-                    <label >Max weight: <input type="text" value={input.weight_max} name="weight_max" onBlur={onValidateWeightMax} onChange={handlerChange} placeholder='e.g: 20' /> </label>   
-                    {
-                        errors.weight_max && 
-                            (<span className="error">{errors.weight_max}</span>)
-                    }                       
+                    <div className={`${style.div}`}>
+                        <label className={`${style.label}`} >Max weight:  </label>   
+                        <input className={`${style.input}`} type="text" value={input.weight_max} name="weight_max" onBlur={onValidateWeightMax} onChange={handlerChange} placeholder='e.g: 20' />
+                    </div>
+                    <div className={`${style.error}`}>
+                        {
+                            errors.weight_max && 
+                                (<span className="error">{errors.weight_max}</span>)
+                        }
+                    </div>                       
                 </div>
                 <div>
-                    <label >Min height: <input type="text" value={input.height_min} name="height_min" onBlur={onValidateHeightMin} onChange={handlerChange} placeholder='e.g: 25' /> </label>         
-                    {
-                        errors.height_min && 
-                            (<span className="error">{errors.height_min}</span>)
-                    }                 
+                    <div className={`${style.div}`}>
+                        <label className={`${style.label}`} >Min height:  </label>     
+                        <input className={`${style.input}`} type="text" value={input.height_min} name="height_min" onBlur={onValidateHeightMin} onChange={handlerChange} placeholder='e.g: 25' />
+                    </div>    
+                    <div className={`${style.error}`}>
+                        {
+                            errors.height_min && 
+                                (<span className="error">{errors.height_min}</span>)
+                        }     
+                    </div>            
                 </div>
                 <div>
-                    <label >Max height: <input type="text" value={input.height_max} name="height_max" onBlur={onValidateHeightMax} onChange={handlerChange} placeholder='e.g: 30' /> </label>      
-                    {
-                        errors.height_max && 
-                            (<span className="error">{errors.height_max}</span>)
-                    }             
+                    <div className={`${style.div}`}>
+                        <label className={`${style.label}`} >Max height:  </label>    
+                        <input className={`${style.input}`} type="text" value={input.height_max} name="height_max" onBlur={onValidateHeightMax} onChange={handlerChange} placeholder='e.g: 30' /> 
+                    </div> 
+                    <div className={`${style.error}`}>
+                        {
+                            errors.height_max && 
+                                (<span className="error">{errors.height_max}</span>)
+                        }  
+                    </div>           
                 </div>
                 <div>
-                    <label >Life span: <input type="text" value={input.life_span} name="life_span" onChange={handlerChange} placeholder='e.g: 14 - 20 years' /> </label>
-                    {
-                        errors.life_span && 
-                            (<span className="error">{errors.life_span}</span>)
-                    }
+                   <div className={`${style.div}`}>
+                        <label className={`${style.label}`} >Life span:  </label>
+                        <input className={`${style.input}`} type="text" value={input.life_span} name="life_span" onChange={handlerChange} placeholder='e.g: 14 - 20 years' />
+                   </div>
+                    <div className={`${style.error}`}>
+                        {
+                            errors.life_span && 
+                                (<span className="error">{errors.life_span}</span>)
+                        }
+                    </div>
                 </div>
                 <div>
-                    <span>Temperaments: </span>
-                    <select onChange={event => handlerChangeTemps(event)} onBlur={onValidateTemperaments}>
+                    <div className={`${style.div}`}>
+                        <span className={`${style.label}`}>Temperaments: </span>
+                        <select className={`${style.select}`} onChange={event => handlerChangeTemps(event)} onBlur={onValidateTemperaments}>
                     {
                         temperaments?.map(ele => {
                             return(
@@ -263,25 +295,34 @@ const CreateDog = () => {
                         })
                     }
                     </select>
-                    {
-                        errors.temperament && 
-                            (<span className="error">{errors.temperament}</span>)
-                    }
+                    </div>
+                    <div className={`${style.error}`}>
+                        {
+                            errors.temperament && 
+                                (<span className="error">{errors.temperament}</span>)
+                        }
+                    </div>
 
                 </div>
                 <div>
-                    <label>Create new temperament: <input type="text" value={createTemp} name='createTemp' onBlur={onValidateTemperamentInput} onChange={event => handlerChangeTempInput(event)} placeholder="Other Temperament..." /></label> 
-                    <button type="button" onClick={event => handlerChangeTemps(event)}>Add</button>
-                    {
-                        errors.inputTemp && 
-                            (<span className="error">{errors.inputTemp}</span>)
-                    }
+                    <div className={`${style.div}`}>
+                        <label className={`${style.label}`}>Create new temperament:  </label> 
+                        <input className={`${style.inputTemp}`} type="text" value={createTemp} name='createTemp' onBlur={onValidateTemperamentInput} onChange={event => handlerChangeTempInput(event)} placeholder="Other Temperament..." />
+                        <button className={`${style.button}`} type="button" onClick={event => handlerChangeTemps(event)}>Add</button>
+                    </div>
+                    <div className={`${style.error}`}>
+                        {
+                            errors.inputTemp && 
+                                (<span className="error">{errors.inputTemp}</span>)
+                        }
+                    </div>
                 </div>
                 <div>
-                    <label > Image: <input type="url" value={input.image} name="image" onChange={handlerChange}placeholder="https://perrito.jpg" /></label>
-                    
+                    <div className={`${style.div}`}>
+                        <label className={`${style.label}`} > Image:  </label>
+                        <input className={`${style.input}`} type="url" value={input.image} name="image" onChange={handlerChange}placeholder="https://perrito.jpg" />
+                    </div>
                 </div>
-
             </form>
             <div>
             <p>You have selected the contious temperaments: </p>
@@ -296,12 +337,13 @@ const CreateDog = () => {
                     
                 }
             </div>
+            <br />
             <div>
                 <button disabled={activeSubmit()} form="Create-Dog" type="submit">Create Dog</button>
             </div>
             <div>
                 {
-                    show === true && createdDog ? <p>Dog Created successfully. <Link to={`/home/dogs/${createdDog.id}`} >Click here</Link> to see details</p> : show === true && !createdDog ? <p>Dog could not be created</p> : <p></p>
+                    show === true && createdDog ? <p>Dog Created successfully. <NavLink to={`/home/dogs/${createdDog.id}`} className={`${style.link}`}>Click here</NavLink> to see details</p> : show === true && !createdDog ? <p>Dog could not be created</p> : <p></p>
 
                 }
             </div>

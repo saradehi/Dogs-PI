@@ -2,6 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getAllDogs } from "../../redux/actions";
+import style from './DeleteDog.module.css'
+import doggi from '../LandingPage/img/dedoArriba.png'
 
 const DeleteDog = () => {
 
@@ -19,11 +21,14 @@ const DeleteDog = () => {
     }
 
     return(
-        <div>
+        <div className={`${style.deleted}`}>
             <h1>{message}</h1>
 
             <div>
                 <button type="button" onClick={event => handlerClick(event)}>Back to home</button>
+            </div>
+            <div>
+                <img className={`${style.img}`} src={doggi} alt="" />
             </div>
         </div>
     )

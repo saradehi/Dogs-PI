@@ -3,7 +3,7 @@ import style from './Filters.module.css'
 const FilterBySource = ({onChange}) => {
     return (
         <div >
-            <select onChange={onChange}>
+            <select className={`${style.select}`} onChange={onChange}>
                 <option value="all">All</option>
                 <option value="sourceApi">API</option>
                 <option value="sourceDb">DB</option>

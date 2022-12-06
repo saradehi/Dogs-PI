@@ -1,14 +1,24 @@
-nav {
-    padding-top: 20px;
-    padding-right: 3vw;
-    padding-left: 10vw;
+.nav {
+    padding-top: .5vw;
+    height: 2rem;
     background-color: #9E7676;
     display: flex;
-    justify-content: right;
-   
+    justify-content: space-around;
+    position: relative;
 }
 
-nav div {
+.itemNav {
     display: inline-block;
     margin-left: 30px;
+    width: 20%;
 }
+
+.span {
+    color: rgb(252, 244, 244);
+}
+
+.span:hover {
+    color :black;
+    font-size: large
+}
+

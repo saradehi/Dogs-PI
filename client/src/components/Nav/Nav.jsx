@@ -5,15 +5,15 @@ import style from './Nav.module.css'
 const NavBar = () => {
 
     return (
-        <nav>
-            <div>
+        <nav className={`${style.nav}`}>
+            <div className={`${style.intemNav}`}>
                 <NavLink to='/' style={{color: 'black', textDecoration: 'none'}} >
-                    <span>Landing Page</span>
+                    <span className={`${style.span}`}>Landing Page</span>
                 </NavLink>
             </div>
-            <div>
+            <div className={`${style.intemNav}`}>
                 <NavLink to='/home/dogs' style={{color: 'black', textDecoration: 'none'}}>
-                    <span>Create Dog</span>
+                    <span className={`${style.span}`}>Create Dog</span>
                 </NavLink>
             </div>
         </nav>
