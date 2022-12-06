@@ -25,7 +25,7 @@ const getDogsApi = async() => {
                 weight_max: arrWeight[1] ? arrWeight[1] : '0',
                 life_span: ele.life_span,
                 temperament: ele.temperament,
-                image: ele.image.url 
+                image: ele.image.url
             }
         });
     
