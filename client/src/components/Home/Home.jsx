@@ -87,7 +87,7 @@ const Home = () => {
                                 <p className={`${style.p}`}>Source</p>
                                 <FilterBySource onChange={e=> handlerSource(e)} ></FilterBySource> 
                                 <p className={`${style.p}`}>Temperaments</p>
-                                <FilterbyTemperament  onChange={e => handlerTemperamentFilter(e)} temperament={temperaments}></FilterbyTemperament>
+                                <FilterbyTemperament onChange={e => handlerTemperamentFilter(e)} temperament={temperaments}></FilterbyTemperament>
                             </div>
                             <div className={`${style.filterBy}`}>
                                 <p className={`${style.p}`}>Order By...</p>

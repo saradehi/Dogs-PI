@@ -1,11 +1,15 @@
 import React from "react";
+import style from './Loading.module.css'
 
 const Loading = () => {
 
     return (
-        <div>
-            <h1>Loading</h1>
-        </div>
+        <>        
+            <div className={`${style.container}`}>
+                <div className={`${style.loader}`}></div>
+                <p>Loading...</p>
+            </div>
+        </>
     )
 };
 

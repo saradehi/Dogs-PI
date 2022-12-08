@@ -10,8 +10,8 @@ const CreateDog = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const temperaments = useSelector(state => state.allTemperaments)
-    const [show, setShow] = useState(false)
     const createdDog = useSelector(state => state.createdDog);
+    const [show, setShow] = useState(false)
     const [createTemp, setCreateTemp] = useState('')
     const [errors, setErrors] = useState({})
     const [input, setInput] = useState({
