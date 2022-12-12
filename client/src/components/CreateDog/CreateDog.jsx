@@ -24,14 +24,20 @@ const CreateDog = () => {
         temperament: [],
         image: ''
     });
-    let filtered = input.temperament.filter(ele => ele !== '')
+    let uniques = [... new Set(input.temperament)];
+    let filtered = uniques.filter(ele => ele !== '');
 
+    const regularExp = '^[ a-zA-ZñÑáéíóúÁÉÍÓÚ]+$';
+    const regularExpNum = '^[0-9]+$';
 
     const onValidateName = () => {
+        
         if(!input.name) {
             errors.name = 'A name is required'
-        } else if(!/^[a-zA-Z]*$/.test(input.name)){
+        } else if(!input.name.match(regularExp)){
             errors.name = "Invalid name"
+        } else if(input.name.length > 20) {
+            errors.name = "Max characters exceded"
         } else if(input.name.length < 3){
             errors.name = 'Too short! Name requires at least 3 characters'
         } else {
@@ -44,10 +50,15 @@ const CreateDog = () => {
     }
 
     const onValidateWeightMin = () => {
+
         if(!input.weight_min) {
             errors.weight_min = 'A min weight is required'
-        } else if(!parseInt(input.weight_min)){
+        } else if(!input.weight_min.match(regularExpNum)){
             errors.weight_min = 'Only numbers allowed'
+        } else if(parseInt(input.weight_min) < 0){
+            errors.weight_min = 'Negative numbers are not allowed'
+        } else if(parseInt(input.weight_min) > 100) {
+            errors.weight_min = 'Weight cannot be over 100'
         } else {
             errors.weight_min = ''
         }
@@ -63,7 +74,9 @@ const CreateDog = () => {
             errors.weight_max = 'A max weight is required'
         } else if(parseInt(input.weight_max) < parseInt(input.weight_min)){
             errors.weight_max = 'Max weight cannot be lower than min weight'
-        } else if(!parseInt(input.weight_max)){
+        } else if(parseInt(input.weight_max) > 200) {
+            errors.weight_max = 'Weight cannot be over 200'
+        } else if(!input.weight_max.match(regularExpNum)){
             errors.weight_max = 'Only numbers allowed'
         } else {
             errors.weight_max = ''
@@ -78,8 +91,10 @@ const CreateDog = () => {
     const onValidateHeightMin = () => {
         if(!input.height_min) {
             errors.height_min = 'A min height is required'
-        } else if(!parseInt(input.height_min)){
+        } else if(!input.height_min.match(regularExpNum)){
             errors.height_min = 'Only numbers allowed'
+        } else if(parseInt(input.height_min) > 200) {
+            errors.height_min = 'Height cannot be over 200'
         } else {
             errors.height_min = ''
         }
@@ -95,7 +110,9 @@ const CreateDog = () => {
             errors.height_max = 'A max height is required'
         } else if(parseInt(input.height_max) < parseInt(input.height_min)){
             errors.height_max = 'Max height cannot be lower than min height'
-        } else if(!parseInt(input.height_max)){
+        } else if(parseInt(input.height_max) > 300) {
+            errors.height_max = 'Height cannot be over 300'
+        } else if(!input.height_max.match(regularExpNum)){
             errors.height_max = 'Only numbers allowed'
         } else {
             errors.height_max = ''
@@ -157,7 +174,7 @@ const CreateDog = () => {
     };
 
     const handlerChangeTemps =  (event) => {
-        let arr = !input.temperament.includes(createTemp) ? [...input.temperament, createTemp, event.target.value] : [...input.temperament, event.target.value]
+        let arr = !input.temperament.includes(createTemp) && !input.temperament.includes(event.target.value) ? [...input.temperament, createTemp, event.target.value] : [...input.temperament, event.target.value]
         setInput({
             ...input,
             temperament: arr.filter(ele => ele !== "")

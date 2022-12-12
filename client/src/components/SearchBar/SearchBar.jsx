@@ -10,7 +10,7 @@ const SearchBar = ({setCurrentPage}) => {
     const handlerInputChange = (event) => {
         event.preventDefault();
         setBreed(event.target.value);
-        setCurrentPage(1);
+        
     };
 
     const handlerSubmit = (event) => {
@@ -21,7 +21,11 @@ const SearchBar = ({setCurrentPage}) => {
         else {
             dispatch(searchByName(breed));
             setBreed('');
+            setTimeout(() => {
+                setCurrentPage(1);
+            }, 750)
         }
+        
     }
 
 

@@ -25,9 +25,8 @@ const DogDetails = ({match}) => {
         dispatch(getDogDetails(dogId))
         setTimeout(() => {
             dispatch(loading(false))
-        }, 1100)
+        }, 900)
         setDeleted(false)
-        console.log(dogId)
     }, []);
 
     const handlerDelete = (event) => {
@@ -39,9 +38,10 @@ const DogDetails = ({match}) => {
             dispatch(deleteDog(event.target.value))
             setTimeout(() => {
                 history.push('/home/deleted')
-            }, 1500)
+            }, 900)
         }
     }
+
 
     return (
         <div className={`${style.container}`}>
@@ -50,7 +50,7 @@ const DogDetails = ({match}) => {
                 isLoading === true ? <Loading></Loading> 
                 : <>
                     <div className={`${style.button}`}>
-                        <button  style={{width: '8rem', height: '1.5rem'}} ><NavLink className={`${style.link}`} to={'/home'}>Back to home</NavLink></button>
+                        <button type="button"  style={{width: '8rem', height: '1.5rem'}} ><NavLink className={`${style.link}`} to={'/home'}>Back to home</NavLink></button>
                     </div>
                     <div className={`${style.containerTitle}`}>
                         <h1>{dog.name}</h1>

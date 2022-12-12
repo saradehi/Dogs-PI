@@ -21,10 +21,4 @@ const NavBar = () => {
 }
 
 
-// <p><button onClick={event => handlerClick(event)}><Link to={'/'}>Landing page</Link> </button></p>
-//             <p><Link to={'/dogs'} >Create Dog</Link></p>
-//             <h1>DOGS API</h1>
-//             <button onClick={ event => {handlerClick(event)}}>Refresh Dogs</button>
-
-
 export default NavBar;
