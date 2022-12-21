@@ -110,7 +110,7 @@ const Home = () => {
                                     </div>
                                     : currentDog.map(ele => {
                                         return (
-                                            <DogCard key={ele.id} image={ele.image} name={ele.name} weight={ele.weight}temperament={ele.temperament} id={ele.id} />
+                                            <DogCard key={ele.id} temperaments={ele.temperaments} image={ele.image} name={ele.name} weight={ele.weight}temperament={ele.temperament} id={ele.id} />
                                         )
                                     })
                                 }

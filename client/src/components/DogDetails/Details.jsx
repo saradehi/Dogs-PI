@@ -7,6 +7,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import style from "./Details.module.css"
 
 
+
 const DogDetails = ({match}) => {
 // estado local loading - setLoading // useState(false)
 // condicional si es true (return p loading - setTimeOut 3000) cambiar setstate a false // si es false renderiza el componente
@@ -58,7 +59,7 @@ const DogDetails = ({match}) => {
                     <div className={`${style.containerSecond}`}>
                         <img className={`${style.img}`} src={dog.image} alt={dog.name} />
                         <div className={`${style.details}`}>
-                            <h3>TEMPERAMENTS: {dog.temperament?.split(', ').map(ele => ele.trim()[0].toUpperCase()+ele.trim().slice(1)).sort(). join(', ')}</h3>
+                            <h3>TEMPERAMENTS: {dog.temperament ? dog.temperament.split(', ').map(ele => ele.trim()[0].toUpperCase()+ele.trim().slice(1)).sort(). join(', ') : dog.temperaments.map(ele => ele.name).sort().join(', ')}</h3>
                             <h4>WEIGHT: {dog.weight_min !== '0' && dog.weight_max !== '0' ? `${dog.weight_min} - ${dog.weight_max} kg` : 'Not specified'}</h4>
                             <h4>HEIGHT: {dog.height} cm</h4>
                             <h4>LIFE SPAN: {!dog.life_span ? "10 - 15 years" : dog.life_span.split(' ').length > 1 ? dog.life_span : `${dog.life_span} years`}</h4>
