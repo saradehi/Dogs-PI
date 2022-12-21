@@ -42,10 +42,10 @@ module.exports = (sequelize) => {
     image: {
       type: DataTypes.STRING,
     },
-    temperament: {
-      type: DataTypes.STRING,
-      allowNull: false
-    }
+    // temperament: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false
+    // }
   },
   {
     timestamps: false

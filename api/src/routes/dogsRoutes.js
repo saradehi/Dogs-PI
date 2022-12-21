@@ -88,7 +88,7 @@ router.post('/', async(req, res) => {
             weight: weightP,
             life_span,
             image:image ? image : "https://ae01.alicdn.com/kf/H2a77ef5575d648c5b30b54416099ae20O/Peluca-de-cosplay-para-perros-accesorios-de-cabeza-falsa-para-perros-peque-os-medianos-y-grandes.jpg_Q90.jpg_.webp",
-            temperament: temperament.split(', ').map(ele=> ele.trim()[0].toUpperCase() + ele.trim().slice(1)).join(', ')
+            // temperament: temperament.split(', ').map(ele=> ele.trim()[0].toUpperCase() + ele.trim().slice(1)).join(', ')
             
         });
 
@@ -102,8 +102,10 @@ router.post('/', async(req, res) => {
                     where: {name: ele}
                 })
                 await newDog.addTemperament(index[0]);
-                
+                // [{id: jhjdkhd, name: idhoidhd}, true/false]
             });
+
+            // sin el foreach : let index = await Temperament.findOrCreate({where: {name: arrTemp}}) await newDog.addTemperament(index[0])
             
         }
         // res.status(201).json('¡Congratulations! Dog created successfully');

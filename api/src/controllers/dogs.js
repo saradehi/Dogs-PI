@@ -37,33 +37,48 @@ const getDogsApi = async() => {
 
 const getDogsDb = async() => {
 
+    // const findDogs = await Dog.findAll({
+    //     include: {
+    //         model: Temperament
+    //     }
+    // });
+
     const findDogs = await Dog.findAll({
         include: {
-            model: Temperament
-        }
-    });
+          model: Temperament,
+          attributes: ["name"],
+          through: { attributes: [] },
+        },
+      });
 
     if(!findDogs) {
         throw new Error("Can't find dog")
     }
 
     else {
-        const findedDogs = findDogs.map(dogs => {
-            return {
-                id: dogs.dataValues.id,
-                name: dogs.dataValues.name,
-                height: dogs.dataValues.height,
-                weight: dogs.dataValues.weight,
-                weight_min: dogs.dataValues.weight_min,
-                weight_max: dogs.dataValues.weight_max,
-                life_span: dogs.dataValues.life_span,
-                temperament: dogs.dataValues.temperament,
-                image: dogs.dataValues.image
-            }
+        // const findedDogs = findDogs.map(dogs => {
+        //     return {
+        //         id: dogs.id,
+        //         name: dogs.name,
+        //         height: dogs.height,
+        //         weight: dogs.weight,
+        //         weight_min: dogs.weight_min,
+        //         weight_max: dogs.weight_max,
+        //         life_span: dogs.life_span,
+        //         temperament: dogs.temperament,
+        //         image: dogs.image
+        //     }
+     
+        // });
+        const findDogs = await Dog.findAll({
+            include: {
+              model: Temperament,
+              attributes: ["name"],
+              through: { attributes: [] },
+            },
+          });
     
-        });
-    
-        return findedDogs;
+        return findDogs;
         
     }
 };
