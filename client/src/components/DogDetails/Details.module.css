@@ -66,5 +66,9 @@
     .warning{
         width: 15rem;
         min-height: 5rem;
+        background-color: #ff000026;
+    }
+    .space{
+        height: 30px;
     }
 }
