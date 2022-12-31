@@ -1,8 +1,7 @@
-
-
 .list {
     list-style: none;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
 }
 
@@ -29,4 +28,13 @@
     opacity: 0.7;
 }
 
+@media (max-width: 600px){
+
+    .pagination{
+        width: 100vw;
+    }
+    .list{
+        padding-left: 0;
+    }
+}
 

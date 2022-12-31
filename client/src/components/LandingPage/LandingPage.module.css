@@ -24,7 +24,6 @@
 }
 
 .back_video {
-    opacity: 0.8;
     position: absolute;
     height: 100vh;
 }
@@ -35,4 +34,26 @@
     margin-right: 10px;
 }
 
+@media (max-width: 600px){
 
+    
+    .back_video{
+        display: none;
+    }
+    
+    body::before{
+        background-image: none;
+        padding-left: 0;
+    }
+
+    .div{
+        min-height: 40%;
+        min-width: 70%;
+    }
+
+    .maker{
+        position: initial;
+        align-self: auto;
+    }
+
+}
